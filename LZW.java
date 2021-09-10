@@ -169,11 +169,6 @@ public void fileEncoder()throws Exception
 
  public static void main(String[] args)throws Exception
  {
-   LZW test = new LZW();
-   test.fileEncoder();
-   System.out.println(test.update.size());
-   System.out.println(test.decodedFileUnicodeValues.size());
-      System.out.println(test.compressedAscii.size());
-      System.out.println(test.compressedAscii.size());
+
  }
 }
