@@ -29,8 +29,8 @@ public class Decoder {
 			map.put(i, "" + (char)i);
 		
 		int nextValue = 256;
-		int previous = binaryValues.get(0);
-		String str = map.get(previous);
+		int current = binaryValues.get(0);
+		String str = map.get(current);
 		String ch = "" + str.charAt(0);
 		out.print(str);
 		for(int i = 1; i < binaryValues.size(); i++)
@@ -38,7 +38,7 @@ public class Decoder {
 			int next = binaryValues.get(i);
 			if(!map.containsKey(next))
 			{
-				str = map.get(previous);
+				str = map.get(current);
 				str = str + ch;
 			}
 			else
@@ -47,9 +47,9 @@ public class Decoder {
 			}
 			out.print(str);
 			ch = "" + str.charAt(0);
-			map.put(nextValue, map.get(previous) + ch);
+			map.put(nextValue, map.get(current) + ch);
 			nextValue++;
-			previous = next;
+			current = next;
 		}
 		
 		out.println();
@@ -67,7 +67,7 @@ public class Decoder {
 		}
 		if(current.length() > 8)
 		{
-			current = current.substring(current.length()-8);
+			current = current.substring(current.length() - 8);
 		}
 		str.append(current);
 		return str.toString();
