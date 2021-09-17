@@ -10,26 +10,26 @@ public class Decoder {
 	// name of method is self-explanatory
     public static void decode(String inputFile, String outputFile) throws IOException
 	{
+		StringBuilder binaryString = new StringBuilder();
 		FileInputStream in = new FileInputStream(inputFile);
 		PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(outputFile)));
-		StringBuilder binary = new StringBuilder();
-		byte[] array = in.readAllBytes();
+		byte[] byteArray = in.readAllBytes();
 		
 		// converts byte array into a giant binary String
-		for(int i = 0; i < array.length; i++)
+		for(int i = 0; i < byteArray.length; i++)
 		{
-			binary.append(toBinary(array[i]));
+			binaryString.append(toBinary(byteArray[i]));
 		}
 		
 		// sanity check: binary String for accuracy
-		System.out.println(binary);
+		System.out.println(binaryString);
 		
 		ArrayList<Integer> binaryValues = new ArrayList<Integer>();
 		
 		// converts the String of binary to an ArrayList of ints, each 9 digits long
-		for(int i = 0 ;i <= binary.length() - 9; i += 9)
+		for(int i = 0 ;i <= binaryString.length() - 9; i += 9)
 		{
-			binaryValues.add(toBinaryValue(binary.substring(i, i+9)));
+			binaryValues.add(toBinaryValue(binaryString.substring(i, i+9)));
 		}
 
 		// sanity check: ArrayList for accuracy
@@ -41,7 +41,7 @@ public class Decoder {
 			map.put(i, "" + (char)i);
 		
 		// decoding part, involving dictionary and writing to outputFile
-		int nextValue = 256;
+		int nextKey = 256;
 		int current = binaryValues.get(0);
 		String str = map.get(current);
 		String ch = "" + str.charAt(0);
@@ -62,8 +62,8 @@ public class Decoder {
 			}
 			out.print(str);
 			ch = "" + str.charAt(0);
-			map.put(nextValue, map.get(current) + ch);
-			nextValue++;
+			map.put(nextKey, map.get(current) + ch);
+			nextKey++;
 			current = next;
 		}
 		
