@@ -1,7 +1,13 @@
 import java.util.*;
 import java.io.*;
 
+// Note: there is something wrong with the encoder that I can't quite figure out.
+// every file, when encoded then decoded, begins with the binary sequence 10101100111011010000000000000101
+// -Peter Shen
+
 public class Decoder {
+
+	// name of method is self-explanatory
     public static void decode(String inputFile, String outputFile) throws IOException
 	{
 		FileInputStream in = new FileInputStream(inputFile);
@@ -9,25 +15,32 @@ public class Decoder {
 		StringBuilder binary = new StringBuilder();
 		byte[] array = in.readAllBytes();
 		
+		// converts byte array into a giant binary String
 		for(int i = 0; i < array.length; i++)
 		{
 			binary.append(toBinary(array[i]));
 		}
 		
+		// sanity check: binary String for accuracy
 		System.out.println(binary);
 		
 		ArrayList<Integer> binaryValues = new ArrayList<Integer>();
 		
+		// converts the String of binary to an ArrayList of ints, each 9 digits long
 		for(int i = 0 ;i <= binary.length() - 9; i += 9)
 		{
 			binaryValues.add(toBinaryValue(binary.substring(i, i+9)));
 		}
+
+		// sanity check: ArrayList for accuracy
 		System.out.println(binaryValues);
 		
+		// initial dictionary values
 		HashMap<Integer, String> map = new HashMap<Integer,String>();
 		for(int i = 0; i < 256; i++)
 			map.put(i, "" + (char)i);
 		
+		// decoding part, involving dictionary and writing to outputFile
 		int nextValue = 256;
 		int current = binaryValues.get(0);
 		String str = map.get(current);
@@ -36,6 +49,8 @@ public class Decoder {
 		for(int i = 1; i < binaryValues.size(); i++)
 		{
 			int next = binaryValues.get(i);
+
+			// adding keys to dictionary, reverse-engineering compression dictionary following LZW rules
 			if(!map.containsKey(next))
 			{
 				str = map.get(current);
@@ -57,6 +72,7 @@ public class Decoder {
 		out.close();
 	}
 
+	// converts number to a String of binary
     public static String toBinary(int num)
 	{
 		String current = Integer.toBinaryString(num);
@@ -73,6 +89,7 @@ public class Decoder {
 		return str.toString();
 	}
 
+	// converts a binary String into an integer
     public static int toBinaryValue(String str)
 	{
 		int end = 0;
@@ -80,14 +97,15 @@ public class Decoder {
 		{
 			if(str.charAt(i) == '1')
 			{
-				end += (1<<(8-i));
+				end += (1 << (8 - i));
 			}
 		}
 		return end;
 	}
 
+	// tester
     public static void main (String [] args) throws IOException
     {
-        decode("encoded2.bin", "decoded.txt");
+        decode("encoded3.bin", "decoded.txt");
     }
 }
