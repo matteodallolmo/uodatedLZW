@@ -10,7 +10,6 @@ import java.io.IOException;
 // import org.apache.commons.io.IOUtils;
 
 
-
 public class LZW
 {
   private ArrayList<Integer> compressedAscii;

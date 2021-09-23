@@ -11,3 +11,6 @@ There is something wrong with the encoder that I can't quite figure out. Every f
 
 Matteo's Notes:
 The decoder does not work so I worked on optimizing the encoder. It currently encodes at around 110 milliseconds of run time.
+
+After trying for too long, I could not comprehend Jaydon's code well enough to properly optimize it. The best I could do was to remove uneccessary libraries to free up space.
+The runtime remains around 110 milliseconds.
