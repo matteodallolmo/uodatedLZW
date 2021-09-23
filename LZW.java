@@ -184,7 +184,11 @@ public void fileEncoder()throws Exception
 
 public static void main(String[] args)throws Exception
 {
+  long startTime = System.nanoTime();
   LZW thing = new LZW();
   thing.fileEncoder();
+  long endTime   = System.nanoTime();
+		long totalTime = endTime - startTime;
+		System.out.println("Execution time in milliseconds  : " + totalTime/1000000);
 }
 }

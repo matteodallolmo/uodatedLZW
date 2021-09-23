@@ -8,3 +8,6 @@ i then convert decodedFileUnicodeValues to binary and ouput them to the .bin fil
 
 Peter Shen's notes:
 There is something wrong with the encoder that I can't quite figure out. Every file, when encoded then decoded, begins with the binary sequence 10101100111011010000000000000101, which returns dictionary values of 345, 436, 0. Shorter files don't return anything at all when decoded, while longer files still retain a lot of their original info, but can't be decoded because there doesn't exist anything at keys 345 and 436 in the dictionary at the very beginning.
+
+Matteo's Notes:
+The decoder does not work so I worked on optimizing the encoder. It currently encodes at around 110 milliseconds of run time.
