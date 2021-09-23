@@ -22,7 +22,7 @@ public class Decoder {
 		}
 		
 		// sanity check: binary String for accuracy
-		System.out.println(binaryString);
+		//System.out.println(binaryString);
 		
 		ArrayList<Integer> binaryValues = new ArrayList<Integer>();
 		
@@ -43,8 +43,8 @@ public class Decoder {
 		// decoding part, involving dictionary and writing to outputFile
 		int nextKey = 256;
 		int current = binaryValues.get(0);
-		String str = map.get(current);
-		String ch = "" + str.charAt(0);
+		String str = map.get(current); //this step tries to access an element of the hashmap that doesn't exist
+		String ch = "" + str.charAt(0); //returns null
 		out.print(str);
 		for(int i = 1; i < binaryValues.size(); i++)
 		{
@@ -106,7 +106,7 @@ public class Decoder {
 	public static void main(String[] args) throws IOException
 	{
 		long startTime = System.nanoTime();
-		decode("encoded3.bin", "decoded.txt");
+		decode("encoded4.bin", "decoded.txt");
 		long endTime   = System.nanoTime();
 		long totalTime = endTime - startTime;
 		System.out.println("Execution time in nanoseconds  : " + totalTime);

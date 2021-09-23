@@ -21,7 +21,6 @@ public class LZW
   private ArrayList<String> inputFileInAnArrayList;
   private ArrayList<String> preDictionary;
   private ArrayList<String> update;
-  private BufferedWriter decodedFile;
   private ArrayList<Integer> decodedFileUnicodeValues;
   private ObjectInputStream is;
   private BufferedReader input;
@@ -33,7 +32,7 @@ public class LZW
     decodedFileUnicodeValues = new ArrayList<Integer>();
     dictionary = new HashMap<String, Integer>();
     // Invertedictionary = new HashMap<Integer, String>();
-    String fileName = "encoded3.bin";
+    String fileName = "encoded4.bin";
     FileOutputStream fileOs = new FileOutputStream(fileName);
     os = new ObjectOutputStream(fileOs);
     compressedAscii = new ArrayList<Integer>();
@@ -105,12 +104,7 @@ public void dictionaryPopulators()
     dictionary.put(preDictionary.get(k), counter+k);
   }
   //inverted dictionary is dictionary with values and keys swapped places
-
-  
 }
-
-
-
 
 public void fileCompressor() throws Exception
 {
