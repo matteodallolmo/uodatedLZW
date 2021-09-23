@@ -103,9 +103,12 @@ public class Decoder {
 		return end;
 	}
 
-	// tester
-    public static void main (String [] args) throws IOException
-    {
-        decode("encoded3.bin", "decoded.txt");
-    }
+	public static void main(String[] args) throws IOException
+	{
+		long startTime = System.nanoTime();
+		decode("encoded3.bin", "decoded.txt");
+		long endTime   = System.nanoTime();
+		long totalTime = endTime - startTime;
+		System.out.println("Execution time in nanoseconds  : " + totalTime);
+	}
 }
