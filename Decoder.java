@@ -108,7 +108,6 @@ public class Decoder {
 		long startTime = System.nanoTime();
 		decode("encoded4.bin", "decoded.txt");
 		long endTime   = System.nanoTime();
-		long totalTime = endTime - startTime;
 		System.out.println("Execution time in nanoseconds  : " + totalTime);
 	}
 }
